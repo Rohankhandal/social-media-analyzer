@@ -107,26 +107,6 @@ export default function ResultPane({ result }) {
               </ul>
             </div>
           )}
-
-          {data.scores && (
-            <div className="bg-white shadow rounded p-4">
-              <h4 className="font-semibold">Scores</h4>
-              <div className="flex gap-6 text-sm mt-2">
-                <div>
-                  <div className="text-xs text-gray-500">Engagement</div>
-                  <div className="font-medium">{data.scores.engagement}</div>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500">Readability</div>
-                  <div className="font-medium">{data.scores.readability}</div>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500">CTA</div>
-                  <div className="font-medium">{data.scores.cta}</div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>
