@@ -25,7 +25,7 @@ export default function Upload({ setResult }) {
       setProgress(0);
 
       const res = await axios.post(
-        "https://social-media-analyzer-9csq.onrender.com/api/upload",
+        "https://social-media-analyzer-backend-80hw.onrender.com/api/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
