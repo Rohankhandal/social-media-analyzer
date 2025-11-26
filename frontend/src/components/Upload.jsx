@@ -10,7 +10,7 @@ export default function Upload({ setResult }) {
   const onDrop = (acceptedFiles) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       setSelectedFile(acceptedFiles[0]);
-      setResult(null); 
+      setResult(null);
     }
   };
 
@@ -24,19 +24,23 @@ export default function Upload({ setResult }) {
       setLoading(true);
       setProgress(0);
 
-      const res = await axios.post("http://localhost:5000/api/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        onUploadProgress: (e) => {
-          if (e.total) {
-            setProgress(Math.round((e.loaded * 100) / e.total));
-          }
-        },
-      });
+      const res = await axios.post(
+        "https://social-media-analyzer-9csq.onrender.com/api/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (e) => {
+            if (e.total) {
+              setProgress(Math.round((e.loaded * 100) / e.total));
+            }
+          },
+        }
+      );
 
       //console.log("response"+res.data);
-      setResult(res.data); 
+      setResult(res.data);
     } catch (err) {
-      console.log("error"+err);
+      console.log("error" + err);
       alert("Upload failed: " + (err.response?.data?.error || err.message));
     } finally {
       setLoading(false);
@@ -50,7 +54,6 @@ export default function Upload({ setResult }) {
 
   return (
     <div>
-     
       <div
         {...getRootProps()}
         className={`border-2 border-dashed rounded-lg p-10 text-center cursor-pointer transition
@@ -58,18 +61,18 @@ export default function Upload({ setResult }) {
       >
         <input {...getInputProps()} accept=".pdf,image/*" />
         <p className="text-gray-700">
-          {isDragActive ? "Drop the file..." : "Drag & drop PDF/Image or click to select"}
+          {isDragActive
+            ? "Drop the file..."
+            : "Drag & drop PDF/Image or click to select"}
         </p>
       </div>
 
-    
       {selectedFile && (
         <div className="mt-4 p-3 bg-gray-200 rounded">
           <strong>Selected File:</strong> {selectedFile.name}
         </div>
       )}
 
-     
       {selectedFile && !loading && (
         <button
           onClick={uploadFile}
@@ -79,7 +82,6 @@ export default function Upload({ setResult }) {
         </button>
       )}
 
-     
       {loading && (
         <div className="mt-4">
           <div className="text-sm mb-1">Processing... {progress}%</div>
